@@ -1,0 +1,82 @@
+name: gnome-robots
+version: 3.22.2
+summary: Avoid the robots and make them crash into each other
+description: |
+  It is the distant future – the year 2000. Evil robots are trying to kill you.
+  Avoid the robots or face certain death.
+
+  Fortunately, the robots are extremely stupid and will always move directly
+  towards you. Trick them into colliding into each other, resulting in their
+  destruction, or into the junk piles that result. You can defend yourself by
+  moving the junk piles, or escape to safety with your handy teleportation
+  device.
+
+  Your supply of safe teleports is limited, and once you run out, teleportation
+  could land you right next to a robot, who will kill you. Survive for as long
+  as possible!
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+plugs:
+    gnome-3-26-1604:
+      interface: content
+      target: $SNAP/gnome-platform
+      default-provider: gnome-3-26-1604:gnome-3-26-1604
+
+slots:
+  # for GtkApplication registration
+  gnome-robots:
+    interface: dbus
+    bus: session
+    name: org.gnome.robots
+
+apps:
+  gnome-robots:
+    command: desktop-launch gnome-robots
+    plugs:
+      - desktop
+      - desktop-legacy
+      - gsettings
+      - unity7
+      - wayland
+    desktop: usr/share/applications/gnome-robots.desktop
+    environment:
+      PATH: $SNAP/usr/games:$PATH
+
+parts:
+  gnome-robots:
+    build-attributes: [no-system-libraries]
+    after: [desktop-gnome-platform]
+    source: https://git.gnome.org/browse/gnome-robots
+    source-type: git
+    source-tag: 3.22.2
+    prepare:
+      sed -i.bak -e 's|=gnome-robots$|=${SNAP}/meta/gui/gnome-robots.png|g' data/gnome-robots.desktop.in
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp ../src/data/icons/hicolor/48x48/gnome-robots.png $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp data/gnome-robots.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/
+    plugin: autotools
+    # workaround the issue described in https://launchpad.net/bugs/1583250
+    configflags: [--prefix=/snap/gnome-robots/current/usr, --bindir=/snap/gnome-robots/current/usr/games]
+    organize:
+      snap/gnome-robots/current/usr: usr
+    build-packages:
+      - appstream-util
+      - gnome-pkg-tools
+      - intltool
+      - libcanberra-gtk3-dev
+      - libglib2.0-dev
+      - libgnome-games-support-1-dev
+      - libgtk-3-dev
+      - librsvg2-dev
+      - yelp-tools
+  libraries:
+    plugin: nil
+    stage-packages:
+      - libgnome-games-support-1-2
+      - libgee-0.8-2
+    prime:
+      - "usr/lib/*/libgnome-games-support-1.so.*"
+      - "usr/lib/x86_64-linux-gnu/libgee-0.8.so.*"
