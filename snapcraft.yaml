@@ -61,7 +61,7 @@ parts:
   gnome-robots:
     build-attributes: [no-system-libraries]
     after: [desktop-gnome-platform]
-    source: https://git.gnome.org/browse/gnome-robots
+    source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-tag: 3.22.2
     override-build: |
