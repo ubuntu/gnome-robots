@@ -57,7 +57,7 @@ apps:
     desktop: usr/share/applications/gnome-robots.desktop
 
 parts:
- libcanberra:
+  libcanberra:
     source: git://git.0pointer.de/libcanberra
     source-type: git
     plugin: autotools
