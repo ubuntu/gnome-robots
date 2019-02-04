@@ -119,7 +119,7 @@ parts:
   libraries:
     plugin: nil
     stage-packages:
-      - libgnome-games-support-1-2
+      - libgnome-games-support-1-3
       - libgee-0.8-2
     prime:
       - "usr/lib/*/libgnome-games-support-1.so.*"
