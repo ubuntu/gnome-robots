@@ -93,7 +93,7 @@ parts:
       mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
 
   gnome-robots:
-    after: [desktop-gnome-platform]
+    after: [desktop-gnome-platform, libcanberra]
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-tag: 3.22.2
