@@ -13,7 +13,7 @@ slots:
 
 apps:
   gnome-robots:
-    extensions: [gnome-3-28]
+    extensions: [gnome-3-34]
     command: usr/bin/gnome-robots
     plugs:
       - gsettings
@@ -43,13 +43,14 @@ parts:
       - libtdb-dev
       - libpulse-dev
       - libgstreamer1.0-dev
+      - libudev-dev
       - gtk-doc-tools
 
   gnome-robots:
     after: [libcanberra]
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
-    source-tag: 3.34.0
+    source-branch: gnome-3-34
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
@@ -73,6 +74,7 @@ parts:
       - libgtk-3-dev
       - librsvg2-dev
       - yelp-tools
+
   libraries:
     plugin: nil
     stage-packages:
