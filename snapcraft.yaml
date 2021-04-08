@@ -46,8 +46,16 @@ parts:
       - libudev-dev
       - gtk-doc-tools
 
+  libgnome-games-support:
+    source: https://gitlab.gnome.org/GNOME/libgnome-games-support.git
+    source-type: git
+    plugin: meson
+    meson-parameters: [--prefix=/usr]
+    organize:
+      snap/gnome-2048/current/usr: usr
+
   gnome-robots:
-    after: [libcanberra]
+    after: [libcanberra, libgnome-games-support]
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-branch: gnome-3-38
@@ -78,7 +86,6 @@ parts:
   libraries:
     plugin: nil
     stage-packages:
-      - libgnome-games-support-1-3
       - libgee-0.8-2
       - libgsound0
     prime:
