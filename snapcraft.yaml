@@ -58,7 +58,7 @@ parts:
     after: [libcanberra, libgnome-games-support]
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
-    source-branch: gnome-3-38
+    source-tag: '40.0'
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
