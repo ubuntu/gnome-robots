@@ -21,40 +21,7 @@ apps:
     common-id: org.gnome.Robots.desktop
 
 parts:
-#  libcanberra:
-#    source: git://git.0pointer.de/libcanberra
-#    source-type: git
-#    plugin: autotools
-#    configflags:
-#      - --prefix=/snap/gnome-robots/current/usr
-#      - --enable-pulse
-#      - --enable-gstreamer
-#      - --enable-gtk3
-#      - --enable-alsa
-#      - --disable-oss
-#    organize:
-#      snap/gnome-robots/current/usr: usr
-#    build-packages:
-#      - libltdl-dev
-#      - libasound2-dev
-#      - libvorbis-dev
-#      - libgtk-3-dev
-#      - libtdb-dev
-#      - libpulse-dev
-#      - libgstreamer1.0-dev
-#      - libudev-dev
-#      - gtk-doc-tools
-#
-#  libgnome-games-support:
-#    source: https://gitlab.gnome.org/GNOME/libgnome-games-support.git
-#    source-type: git
-#    plugin: meson
-#    meson-parameters: [--prefix=/usr]
-#    organize:
-#      snap/gnome-2048/current/usr: usr
-
   gnome-robots:
-    #after: [libcanberra, libgnome-games-support]
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-tag: '40.0'
@@ -72,22 +39,5 @@ parts:
     organize:
       snap/gnome-robots/current/usr: usr
     build-packages:
-      #- appstream-util
-      #- gettext
       - intltool
-      #- libglib2.0-dev
-      #- libgnome-games-support-1-dev
-      #- libgsound-dev
-      #- libgtk-3-dev
-      #- librsvg2-dev
       - yelp-tools
-
-#  libraries:
-#    plugin: nil
-#    stage-packages:
-#      - libgee-0.8-2
-#      - libgsound0
-#    prime:
-#      - "usr/lib/*/libgnome-games-support-1.so.*"
-#      - "usr/lib/*/libgee-0.8.so.*"
-#      - "usr/lib/*/libgsound.so.*"
