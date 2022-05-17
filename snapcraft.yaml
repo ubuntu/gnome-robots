@@ -62,7 +62,7 @@ parts:
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
     override-build: |
-      sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' data/org.gnome.Robots.desktop.in
+      sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $SNAPCRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
       snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
       cp ../src/data/icons/hicolor/scalable/org.gnome.Robots.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
