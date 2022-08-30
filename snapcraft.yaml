@@ -29,9 +29,6 @@ parts:
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-tag: '40.0'
-    override-pull: |
-      craftctl default
-      craftctl set version=$(git describe --tags --abbrev=10)
     override-build: |
       sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $CRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
       craftctl default
