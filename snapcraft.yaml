@@ -2,7 +2,11 @@ name: gnome-robots
 adopt-info: gnome-robots
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core22
+
+layout:
+  /usr/share/gnome-robots:
+    bind: $SNAP/usr/share/gnome-robots
 
 slots:
   # for GtkApplication registration
@@ -13,7 +17,7 @@ slots:
 
 apps:
   gnome-robots:
-    extensions: [gnome-3-38]
+    extensions: [gnome]
     command: usr/bin/gnome-robots
     plugs:
       - audio-playback
@@ -25,16 +29,12 @@ parts:
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
     source-tag: '40.0'
-    override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags --abbrev=10)
     override-build: |
-      sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $SNAPCRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
-      snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
-      cp ../src/data/icons/hicolor/scalable/org.gnome.Robots.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
+      sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $CRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui/
+      cp ../src/data/icons/hicolor/scalable/org.gnome.Robots.svg $CRAFT_PART_INSTALL/meta/gui/
     plugin: meson
-    meson-parameters: [--prefix=/snap/gnome-robots/current/usr]
+    meson-parameters:
+      - --prefix=/usr
     parse-info: [usr/share/metainfo/org.gnome.Robots.appdata.xml]
-    organize:
-      snap/gnome-robots/current/usr: usr
