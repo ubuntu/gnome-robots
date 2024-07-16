@@ -2,7 +2,7 @@ name: gnome-robots
 adopt-info: gnome-robots
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core22
+base: core24
 
 layout:
   /usr/share/gnome-robots:
