@@ -40,3 +40,7 @@ parts:
     meson-parameters:
       - --prefix=/usr
     parse-info: [usr/share/metainfo/org.gnome.Robots.appdata.xml]
+    build-packages:
+      - libgnome-games-support-1-dev
+    stage-packages:
+      - libgnome-games-support-1-3
