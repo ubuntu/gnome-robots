@@ -27,9 +27,12 @@ apps:
 parts:
   gnome-robots:
 # ext:updatesnap
+#   version-format:
+#     lower-than: '41'
+# Newer versions switch to Rust
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
-    source-tag: '41.2'
+    source-tag: '40.0'
     source-depth: 1
     override-build: |
       sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $CRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
