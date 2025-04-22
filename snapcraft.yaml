@@ -27,14 +27,12 @@ apps:
 parts:
   gnome-robots:
 # ext:updatesnap
-#   version-format:
-#     lower-than: '41'
-# Newer versions switch to Rust
     source: https://gitlab.gnome.org/GNOME/gnome-robots.git
     source-type: git
-    source-tag: '40.0'
+    source-tag: '41.2'
     source-depth: 1
     override-build: |
+      rustup default stable
       sed -i.bak -e 's|=org.gnome.Robots$|=${SNAP}/meta/gui/org.gnome.Robots.svg|g' $CRAFT_PART_SRC/data/org.gnome.Robots.desktop.in
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/meta/gui/
@@ -42,8 +40,10 @@ parts:
     plugin: meson
     meson-parameters:
       - --prefix=/usr
-    parse-info: [usr/share/metainfo/org.gnome.Robots.appdata.xml]
+    parse-info: [usr/share/metainfo/org.gnome.Robots.metainfo.xml]
     build-packages:
       - libgnome-games-support-1-dev
+    build-snaps:
+      - rustup
     stage-packages:
       - libgnome-games-support-1-3
