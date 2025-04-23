@@ -40,6 +40,7 @@ parts:
     plugin: meson
     meson-parameters:
       - --prefix=/usr
+      - -Dprofile=release
     parse-info: [usr/share/metainfo/org.gnome.Robots.metainfo.xml]
     build-snaps:
       - rustup
